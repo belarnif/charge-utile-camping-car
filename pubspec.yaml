@@ -1,0 +1,23 @@
+name: charge_utile_camping_car
+description: Calculateur de charge utile pour camping-cars et fourgons aménagés.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '^3.13.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_mobile_ads: ^9.1.0 # v5.x est déprécié depuis Q1 2026 — vérifier pub.dev pour la dernière version au moment du build
+  app_tracking_transparency: ^2.0.6
+  shared_preferences: ^2.2.3
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

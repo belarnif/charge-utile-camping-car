@@ -1,0 +1,41 @@
+<!--
+  ⚠️ EXTRAIT À FUSIONNER — ceci N'EST PAS un Info.plist complet.
+  Ne remplace jamais ton fichier ios/Runner/Info.plist généré par
+  `flutter create` avec uniquement ce contenu : tu perdrais des clés
+  essentielles au démarrage de l'app (CFBundleIdentifier, CFBundleVersion,
+  CFBundleExecutable, UILaunchStoryboardName, UISupportedInterfaceOrientations,
+  LSRequiresIPhoneOS, etc.).
+
+  Ouvre ton Info.plist existant et ajoute seulement les clés ci-dessous
+  à l'intérieur du <dict> déjà présent.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- ... tout le contenu existant généré par flutter create reste ici ... -->
+
+    <!-- ID de test AdMob — remplacer par ton vrai App ID avant publication -->
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-3940256099942544~1458002511</string>
+
+    <key>NSUserTrackingUsageDescription</key>
+    <string>Cet identifiant sera utilisé pour vous proposer des publicités personnalisées.</string>
+
+    <!-- Obligatoire pour la médiation AdMob sur iOS. Liste complète :
+         https://developers.google.com/admob/ios/choosing-networks -->
+    <key>SKAdNetworkItems</key>
+    <array>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>cstr6suwn9.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>4fzdc2evr5.skadnetwork</string>
+        </dict>
+    </array>
+
+    <!-- ... reste du contenu existant ... -->
+</dict>
+</plist>
