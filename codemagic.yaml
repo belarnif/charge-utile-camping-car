@@ -1,0 +1,46 @@
+workflows:
+  default-workflow:
+    name: Default Workflow
+    max_build_duration: 30
+    environment:
+      flutter: stable
+    scripts:
+      - name: Scaffold missing Android platform files
+        script: |
+          set -e
+          if [ ! -f android/settings.gradle.kts ]; then
+            echo "Fichiers Android manquants détectés, génération..."
+            flutter create --platforms=android --org com.belarnif.chargeutileapp --project-name charge_utile_camping_car /tmp/scaffold
+
+            cp -f /tmp/scaffold/android/settings.gradle.kts android/settings.gradle.kts
+            cp -f /tmp/scaffold/android/build.gradle.kts android/build.gradle.kts
+            cp -f /tmp/scaffold/android/gradle.properties android/gradle.properties
+            cp -f /tmp/scaffold/android/app/build.gradle.kts android/app/build.gradle.kts
+
+            cp -rf /tmp/scaffold/android/gradle android/gradle
+            cp -f /tmp/scaffold/android/gradlew android/gradlew
+            cp -f /tmp/scaffold/android/gradlew.bat android/gradlew.bat
+            chmod +x android/gradlew
+
+            mkdir -p android/app/src/main/kotlin
+            cp -rf /tmp/scaffold/android/app/src/main/kotlin/. android/app/src/main/kotlin/
+
+            mkdir -p android/app/src/main/res
+            cp -rf /tmp/scaffold/android/app/src/main/res/. android/app/src/main/res/
+
+            echo "Fichiers Android régénérés avec succès."
+          else
+            echo "Fichiers Android déjà présents, rien à faire."
+          fi
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+      - name: Build APK (debug)
+        script: |
+          flutter build apk --debug
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
+      - build/app/outputs/**/mapping.txt
+    publishing:
+      email:
+        recipients: []
