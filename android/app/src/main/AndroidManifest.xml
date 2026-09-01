@@ -40,14 +40,4 @@
     <!-- À décommenter uniquement si l'app N'UTILISE PAS l'Advertising ID -->
     <!-- <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" /> -->
 
-    <!-- Nécessaire pour que le bouton "Trouver un point de pesée" (url_launcher)
-         puisse ouvrir Google Maps de façon fiable sur Android 11+ (restriction
-         de visibilité des packages). -->
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="https" />
-        </intent>
-    </queries>
-
 </manifest>

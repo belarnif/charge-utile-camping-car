@@ -42,16 +42,4 @@ class ChargeItem {
     required this.weightKg,
     this.isPassenger = false,
   });
-
-  Map<String, dynamic> toJson() => {
-        'label': label,
-        'weightKg': weightKg,
-        'isPassenger': isPassenger,
-      };
-
-  factory ChargeItem.fromJson(Map<String, dynamic> json) => ChargeItem(
-        label: json['label'] as String,
-        weightKg: (json['weightKg'] as num).toDouble(),
-        isPassenger: json['isPassenger'] as bool? ?? false,
-      );
 }

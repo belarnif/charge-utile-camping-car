@@ -6,7 +6,6 @@ import '../models/vehicle.dart';
 /// le PTAC/PVOM à chaque ouverture de l'app.
 class StorageService {
   static const _vehicleKey = 'saved_vehicle';
-  static const _itemsKey = 'saved_charge_items';
 
   static Future<void> saveVehicle(Vehicle vehicle) async {
     final prefs = await SharedPreferences.getInstance();
@@ -27,29 +26,5 @@ class StorageService {
   static Future<void> clearVehicle() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_vehicleKey);
-  }
-
-  /// Sauvegarde la liste des postes de chargement (passagers, options...)
-  /// pour que l'inventaire ne se réinitialise pas à chaque ouverture de l'app —
-  /// un besoin réel remonté par les camping-caristes ("faire un inventaire
-  /// régulier des affaires embarquées").
-  static Future<void> saveItems(List<ChargeItem> items) async {
-    final prefs = await SharedPreferences.getInstance();
-    final raw = jsonEncode(items.map((item) => item.toJson()).toList());
-    await prefs.setString(_itemsKey, raw);
-  }
-
-  static Future<List<ChargeItem>> loadItems() async {
-    final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getString(_itemsKey);
-    if (raw == null) return [];
-    try {
-      final decoded = jsonDecode(raw) as List<dynamic>;
-      return decoded
-          .map((entry) => ChargeItem.fromJson(entry as Map<String, dynamic>))
-          .toList();
-    } catch (_) {
-      return [];
-    }
   }
 }
