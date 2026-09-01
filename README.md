@@ -113,6 +113,45 @@ App gratuite, monétisée uniquement par la publicité AdMob (bannière
 adaptative collapsible). Pas de système d'abonnement — décision volontaire
 pour garder l'app 100% libre d'accès.
 
+## Nouvelles fonctionnalités (30/08/2026) — basées sur les besoins réels des camping-caristes
+
+Recherche faite dans les forums (campingcar-bricoloisirs, routard, ACCCF) sur les vraies
+frustrations liées au poids. Trois besoins récurrents adressés :
+
+- **La liste des postes de chargement est maintenant sauvegardée** entre les
+  ouvertures de l'app (avant, elle se réinitialisait à chaque fermeture) —
+  répond au besoin cité de "faire un inventaire régulier des affaires
+  embarquées".
+- **Convertisseur eau/gasoil → kg** dans le formulaire d'ajout de poste :
+  saisis un volume en litres, le poids se calcule automatiquement
+  (1 L d'eau = 1 kg, 1 L de gasoil ≈ 0,84 kg). Les gens réduisent leur eau
+  embarquée "au pif" pour gagner du poids — ça leur donne un chiffre exact.
+- **Bouton "Trouver un point de pesée à proximité"** : ouvre une recherche
+  Google Maps ciblée (pont-bascule, déchetterie, garage). C'est la question
+  la plus posée sur les forums camping-car concernant le poids — il n'existe
+  pas de base de données fiable des ponts-bascules publics en France, donc
+  on s'appuie sur les données déjà présentes dans Maps plutôt que d'inventer
+  une liste de lieux non vérifiée.
+
+- **`<queries>` ajouté au manifeste Android** pour garantir que le bouton
+  "Trouver un point de pesée" (via `url_launcher`) fonctionne de façon
+  fiable sur Android 11+ — un vieux souci connu du package sur certains
+  appareils sans cette déclaration.
+- **Message d'erreur ajouté** dans le formulaire d'ajout de poste : si le
+  volume (eau/gasoil) ou le poids n'est pas renseigné, le bouton "Ajouter"
+  affichait un échec silencieux — il indique maintenant clairement ce qui
+  manque.
+
+- **`codemagic.yaml` intégré à l'archive principale** — il avait été créé et
+  transmis séparément lors du dépannage du build, sans jamais être ajouté au
+  dossier principal du projet. Sans conséquence concrète (un `unzip -o`
+  n'efface jamais de fichiers), mais l'archive était depuis incomplète par
+  rapport à ce qui tourne réellement sur GitHub. C'est corrigé.
+- **Clarification dans `android/app/build.gradle.kts`** : ce fichier n'est en
+  réalité plus utilisé par le build Codemagic actuel (le script dans
+  `codemagic.yaml` le régénère et l'écrase à chaque build) — il ne sert que
+  de référence pour une compilation locale future.
+
 ## Fonctionnalités V1
 
 - Saisie PTAC/PVOM/places (carte grise) avec sauvegarde locale

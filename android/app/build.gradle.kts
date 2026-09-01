@@ -4,6 +4,12 @@
 // adapte la syntaxe (minSdkVersion 21 au lieu de minSdk = 21, etc.) —
 // ne mélange jamais les deux syntaxes dans le même fichier.
 //
+// ⚠️ IMPORTANT : ce fichier N'EST PLUS UTILISÉ par le build Codemagic actuel.
+// Le script dans codemagic.yaml régénère un vrai build.gradle.kts à chaque
+// build via `flutter create`, et écrase celui-ci avant la compilation. Ce
+// fichier ne sert que de référence si tu compiles un jour depuis un
+// ordinateur avec `flutter create` en local, sans passer par Codemagic.
+//
 // Repère le bloc `defaultConfig` existant dans ton android/app/build.gradle.kts
 // et assure-toi qu'il contient bien :
 
