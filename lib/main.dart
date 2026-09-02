@@ -7,7 +7,16 @@ import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await _initAdsFlow();
+  // Filet de sécurité : si l'initialisation RGPD/AdMob plante ou traîne
+  // (ex: premier lancement après installation, réseau lent), l'app ne
+  // doit JAMAIS rester bloquée sur un écran blanc. On lui laisse 5
+  // secondes max, sinon on démarre quand même — les pubs se chargeront
+  // simplement un peu plus tard, une fois l'app affichée.
+  try {
+    await _initAdsFlow().timeout(const Duration(seconds: 5));
+  } catch (_) {
+    // Timeout ou erreur inattendue : on continue sans bloquer le démarrage.
+  }
   runApp(const MyApp());
 }
 

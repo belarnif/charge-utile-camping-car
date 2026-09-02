@@ -53,7 +53,14 @@ class _AdaptiveBannerAdState extends State<AdaptiveBannerAd>
 
   Future<void> _loadAdaptiveBanner(double width) async {
     final canRequest = await ConsentInformation.instance.canRequestAds();
-    if (!canRequest) return;
+    if (!canRequest) {
+      // Le consentement RGPD n'est pas encore prêt (ex: init encore en
+      // cours en arrière-plan après le démarrage rapide de l'app). On
+      // réessaie plutôt que d'abandonner définitivement — sinon la
+      // bannière ne se chargerait plus jamais.
+      _retryWithBackoff(width);
+      return;
+    }
 
     final AnchoredAdaptiveBannerAdSize? size =
         await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
